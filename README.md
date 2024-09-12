@@ -1,15 +1,33 @@
 # iana_time_zone
 
-A new Flutter project.
 
-## Getting Started
+Library for fetch IANA Time Zone (e.g. 'Asia/Kolkata')
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/to/develop-plugins),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+## Import
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+import 'package:iana_time_zone/iana_time_zone.dart';
+```
+
+## Usage
+
+```dart
+String timeZone = await IanaTimeZone.getIanaTimeZone;
+print(timeZone);  // 'Asia/Kolkata'
+```
+
+```dart
+FutureBuilder(
+future: IanaTimeZone.getIanaTimeZone,
+builder:(context,snapshot){
+            if(snapshot.connectionState==ConnectionState.done) {
+              return Text('${snapshot.data}');
+            }else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            }  else{
+              return const CircularProgressIndicator();
+            }
+          }
+          )
+```
 
